@@ -1,0 +1,10 @@
+# ide folders
+.idea/
+.vscode/
+
+# not project files
+__pycache__/
+venv/
+env/
+.mypy_cache/
+.env

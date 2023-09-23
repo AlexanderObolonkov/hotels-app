@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "hotels-app"
+version = "0.1.0"
+description = ""
+authors = ["Alexandr Obolonkov <itbolonkov2019@gmail.com>"]
+readme = "README.md"
+packages = [{include = "hotels_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["all"], version = "^0.103.1"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
