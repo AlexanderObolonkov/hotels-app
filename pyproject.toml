@@ -14,6 +14,7 @@ fastapi = {extras = ["all"], version = "^0.103.1"}
 black = "^23.9.1"
 ruff = "^0.0.291"
 mypy = "^1.5.1"
+pre-commit = "^3.4.0"
 
 [build-system]
 requires = ["poetry-core"]
