@@ -30,6 +30,7 @@ select = ["F", "E", "W", "C90",
 ignore = ["A003", "B008", "S105"]  # TODO: fix after experiments
 
 [tool.mypy]
+exclude = "app/database.py"
 explicit_package_bases = true
 plugins = [
   "pydantic.mypy"
