@@ -1141,7 +1141,6 @@ files = [
 
 [package.dependencies]
 greenlet = {version = "!=0.4.17", markers = "platform_machine == \"aarch64\" or platform_machine == \"ppc64le\" or platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"win32\" or platform_machine == \"WIN32\""}
-mypy = {version = ">=0.910", optional = true, markers = "extra == \"mypy\""}
 typing-extensions = ">=4.2.0"
 
 [package.extras]
@@ -1471,4 +1470,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "1ee4122b37e9785dbfe8b1648e0856b8896e53c18db25f0a7c856dd48f8ead08"
+content-hash = "d197cbe82a9f4a3a4542b5fdb0349b8633cfb0183c8307bc76f0feac2740566a"
