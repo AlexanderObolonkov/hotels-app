@@ -7,8 +7,8 @@ class Bookings(Base):
     __tablename__ = "bookings"
 
     id = Column(Integer, primary_key=True)
-    room_id = Column(ForeignKey("rooms.id"))
-    user_id = Column(ForeignKey("users.id"))
+    room_id = Column(Integer, ForeignKey("rooms.id"))
+    user_id = Column(Integer, ForeignKey("users.id"))
     date_from = Column(Date, nullable=False)
     date_to = Column(Date, nullable=False)
     price = Column(Integer, nullable=False)

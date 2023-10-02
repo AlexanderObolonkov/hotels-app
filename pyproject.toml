@@ -19,6 +19,7 @@ black = "^23.9.1"
 ruff = "^0.0.291"
 mypy = "^1.5.1"
 pre-commit = "^3.4.0"
+sqlalchemy = { extras = ["mypy"], version = "^2.0.21" }
 
 [build-system]
 requires = ["poetry-core"]
@@ -33,4 +34,4 @@ exclude = ["migrations"]
 
 [tool.mypy]
 explicit_package_bases = true
-plugins = ["pydantic.mypy"]
+plugins = ["pydantic.mypy", "sqlalchemy.ext.mypy.plugin"]
