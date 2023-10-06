@@ -9,14 +9,14 @@ class BaseDAO:
     model: Optional[type[Base]] = None
 
     @classmethod
-    async def find_one_or_none(cls, **filter_by) -> RowMapping | None:
+    async def find_one_or_none(cls, **filter_by) -> Optional[RowMapping]:
         async with async_session_maker() as session:
             query = select().filter_by(**filter_by)
             result = await session.execute(query)
             return result.mappings().one_or_none()
 
     @classmethod
-    async def find_all(cls, **filter_by) -> RowMapping | None:
+    async def find_all(cls, **filter_by) -> Optional[RowMapping]:
         async with async_session_maker() as session:
             query = select().filter_by(**filter_by)
             result = await session.execute(query)
