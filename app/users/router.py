@@ -38,5 +38,7 @@ async def logout_user(response: Response) -> dict[str, str]:
 
 
 @router.get("/me")
-async def get_info_about_current_user(current_user: Users = Depends(get_current_user)):
+async def get_info_about_current_user(
+    current_user: Users = Depends(get_current_user),
+) -> Users:
     return current_user
