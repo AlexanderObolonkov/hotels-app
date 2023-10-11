@@ -4,7 +4,7 @@ from app.users.auth import _get_password_hash, authenticate_user, create_access_
 from app.users.dao import UsersDAO
 from app.users.dependencies import get_current_user
 from app.users.models import Users
-from app.users.shemas import SUserAuth
+from app.users.shemas import SUser, SUserAuth
 
 router = APIRouter(
     prefix="/auth",
@@ -40,5 +40,5 @@ async def logout_user(response: Response) -> dict[str, str]:
 @router.get("/me")
 async def get_info_about_current_user(
     current_user: Users = Depends(get_current_user),
-) -> Users:
-    return current_user
+) -> SUser:
+    return SUser.model_validate(current_user)
