@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 
 
 class BookingException(HTTPException):
-    status_code = 409
+    status_code = 404
     detail = ""
 
     def __init__(self):
@@ -32,6 +32,11 @@ class TokenAbsentException(BookingException):
 class IncorrectTokenFormatException(BookingException):
     status_code = status.HTTP_401_UNAUTHORIZED
     detail = "Неверный формат токена"
+
+
+class RoomCannotBeBookedException(BookingException):
+    status_code = status.HTTP_409_CONFLICT
+    detail = "Не осталось свободных номеров"
 
 
 UserIsNotPresentException = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)

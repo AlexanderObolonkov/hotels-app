@@ -11,6 +11,7 @@ from app.exceptions import (
     UserIsNotPresentException,
 )
 from app.users.dao import UsersDAO
+from app.users.shemas import SUser
 
 
 def get_token(request: Request) -> str:
@@ -20,7 +21,7 @@ def get_token(request: Request) -> str:
     return token
 
 
-async def get_current_user(token: str = Depends(get_token)):
+async def get_current_user(token: str = Depends(get_token)) -> SUser:
     try:
         payload = jwt.decode(
             token,
