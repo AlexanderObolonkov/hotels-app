@@ -1,8 +1,11 @@
 from datetime import date
 
+from fastapi import APIRouter
+
 from app.hotels.rooms.dao import RoomDAO
 from app.hotels.rooms.schemas import SRoomInfo
-from app.hotels.router import router
+
+router = APIRouter()
 
 
 @router.get("/{hotel_id}/rooms")
