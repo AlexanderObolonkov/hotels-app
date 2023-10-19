@@ -4,7 +4,7 @@ from fastapi import APIRouter
 
 from app.exceptions import CannotBookHotelForLongPeriod, DateFromCannotBeAfterDateTo
 from app.hotels.dao import HotelsDAO
-from app.hotels.shemas import SHotel
+from app.hotels.schemas import SHotel
 
 router = APIRouter(
     prefix="/hotels",

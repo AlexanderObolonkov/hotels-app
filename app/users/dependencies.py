@@ -11,7 +11,7 @@ from app.exceptions import (
     UserIsNotPresentException,
 )
 from app.users.dao import UsersDAO
-from app.users.shemas import SUser
+from app.users.schemas import SUser
 
 
 def get_token(request: Request) -> str:
