@@ -39,4 +39,14 @@ class RoomCannotBeBookedException(BookingException):
     detail = "Не осталось свободных номеров"
 
 
+class DateFromCannotBeAfterDateTo(BookingException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    detail = "Дата заезда не может быть позже даты выезда"
+
+
+class CannotBookHotelForLongPeriod(BookingException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    detail = "Невозможно забронировать отель сроком более месяца"
+
+
 UserIsNotPresentException = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
