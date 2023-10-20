@@ -14,3 +14,9 @@ class SBooking(BaseModel):
     price: int
     total_cost: int
     total_days: int
+
+
+class SNewBooking(BaseModel):
+    room_id: int
+    date_from: date
+    date_to: date

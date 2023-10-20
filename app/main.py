@@ -10,4 +10,5 @@ app = FastAPI()
 app.include_router(router_users)
 app.include_router(router_bookings)
 app.include_router(router_hotels)
+
 app.include_router(router_pages)

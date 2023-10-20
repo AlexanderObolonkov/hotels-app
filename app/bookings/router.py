@@ -1,10 +1,9 @@
-from datetime import date
 from typing import Optional
 
 from fastapi import APIRouter, Depends
 
 from app.bookings.dao import BookingDAO
-from app.bookings.schemas import SBooking
+from app.bookings.schemas import SBooking, SNewBooking
 from app.exceptions import RoomCannotBeBookedException
 from app.users.dependencies import get_current_user
 from app.users.models import Users
@@ -20,17 +19,20 @@ async def get_bookings(user: Users = Depends(get_current_user)) -> list[SBooking
     return await BookingDAO.find_all(user_id=user.id)
 
 
-@router.post("")
+@router.post("", status_code=201)
 async def add_booking(
-    room_id: int,
-    date_from: date,
-    date_to: date,
+    booking: SNewBooking,
     user: Users = Depends(get_current_user),
 ) -> Optional[SBooking]:
-    booking = await BookingDAO.add(int(user.id), room_id, date_from, date_to)
-    if not booking:
+    booking_to_add = await BookingDAO.add(
+        int(user.id),
+        booking.room_id,
+        booking.date_from,
+        booking.date_to,
+    )
+    if not booking_to_add:
         raise RoomCannotBeBookedException
-    return booking
+    return booking_to_add
 
 
 @router.delete("/{booking_id}")
