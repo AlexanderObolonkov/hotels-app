@@ -33,7 +33,7 @@ build-backend = "poetry.core.masonry.api"
 select = ["F", "E", "W", "C90",
     "I", "N", "S", "B", "A",
     "ISC", "T20", "Q", "PTH"]
-ignore = ["A003", "B008", "S105", "B904"]  # TODO: fix after experiments
+ignore = ["A003", "B008", "S105", "B904", "PTH123"]  # TODO: fix after experiments
 exclude = ["migrations"]
 
 [tool.mypy]

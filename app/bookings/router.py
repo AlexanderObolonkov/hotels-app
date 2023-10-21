@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 
 from app.bookings.dao import BookingDAO
 from app.bookings.schemas import SBooking, SNewBooking
@@ -19,7 +19,7 @@ async def get_bookings(user: Users = Depends(get_current_user)) -> list[SBooking
     return await BookingDAO.find_all(user_id=user.id)
 
 
-@router.post("", status_code=201)
+@router.post("", status_code=status.HTTP_201_CREATED)
 async def add_booking(
     booking: SNewBooking,
     user: Users = Depends(get_current_user),
