@@ -2,6 +2,8 @@ from datetime import date, datetime, timedelta
 from typing import Optional
 
 from fastapi import APIRouter, Query
+from fastapi_cache.decorator import cache
+from pydantic import TypeAdapter
 
 from app.exceptions import CannotBookHotelForLongPeriod, DateFromCannotBeAfterDateTo
 from app.hotels.dao import HotelsDAO
@@ -16,6 +18,7 @@ router.include_router(router_room)
 
 
 @router.get("/{location}")
+@cache(expire=30)
 async def get_hotels_by_location_and_time(
     location: str,
     date_from: date = Query(..., description=f"Например, {datetime.now().date()}"),
@@ -28,7 +31,8 @@ async def get_hotels_by_location_and_time(
     if (date_to - date_from).days > 31:
         raise CannotBookHotelForLongPeriod
     hotels = await HotelsDAO.find_all(location, date_from, date_to)
-    return hotels
+    hotels_parsed = TypeAdapter(list[SHotel]).validate_python(hotels)
+    return hotels_parsed
 
 
 @router.get("/id/{hotel_id}")

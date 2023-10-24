@@ -19,3 +19,4 @@ repos:
           - "pydantic>=1.10.4"
           - "sqlalchemy[mypy]"
           - "types-passlib"
+          - "types-redis"
