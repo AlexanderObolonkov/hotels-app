@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     DB_NAME: str
     SECRET_KEY: str
     ALGORITHM: str
+    REDIS: str
 
     model_config = SettingsConfigDict(env_file=".env")
 
