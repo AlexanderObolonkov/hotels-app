@@ -21,3 +21,4 @@ repos:
           - "types-passlib"
           - "types-redis"
           - "celery-types"
+          - "types-Pillow"
