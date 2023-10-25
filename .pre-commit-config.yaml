@@ -20,3 +20,4 @@ repos:
           - "sqlalchemy[mypy]"
           - "types-passlib"
           - "types-redis"
+          - "celery-types"
