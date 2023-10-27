@@ -1,10 +1,12 @@
 from typing import Optional
 
 from fastapi import APIRouter, Depends, status
+from pydantic import TypeAdapter
 
 from app.bookings.dao import BookingDAO
 from app.bookings.schemas import SBooking, SNewBooking
 from app.exceptions import RoomCannotBeBookedException
+from app.tasks.tasks import send_booking_confirmation_email
 from app.users.dependencies import get_current_user
 from app.users.models import Users
 
@@ -32,6 +34,8 @@ async def add_booking(
     )
     if not booking_to_add:
         raise RoomCannotBeBookedException
+    booking_dict = TypeAdapter(SBooking).validate_python(booking_to_add).model_dump()
+    send_booking_confirmation_email.delay(booking_dict, str(user.email))
     return booking_to_add
 
 
