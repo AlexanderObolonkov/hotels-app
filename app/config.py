@@ -9,7 +9,12 @@ class Settings(BaseSettings):
     DB_NAME: str
     SECRET_KEY: str
     ALGORITHM: str
-    REDIS: str
+    REDIS_HOST: str
+    REDIS_PORT: str
+    SMTP_HOST: str
+    SMTP_PORT: str
+    SMTP_USER: str
+    SMTP_PASS: str
 
     model_config = SettingsConfigDict(env_file=".env")
 
