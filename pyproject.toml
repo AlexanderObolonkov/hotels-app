@@ -32,6 +32,7 @@ types-python-jose = "^3.3.4.8"
 types-redis = "^4.6.0.7"
 celery-types = "^0.20.0"
 types-pillow = "^10.1.0.0"
+pytest = "^7.4.3"
 
 [build-system]
 requires = ["poetry-core"]
@@ -47,3 +48,7 @@ exclude = ["migrations"]
 [tool.mypy]
 explicit_package_bases = true
 plugins = ["pydantic.mypy", "sqlalchemy.ext.mypy.plugin"]
+
+[tool.pytest.ini_options]
+pythonpath = ". app"
+asyncio_mode = "auto"
