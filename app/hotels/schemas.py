@@ -9,3 +9,4 @@ class SHotel(BaseModel):
     location: str
     services: list[str]
     rooms_quantity: int
+    image_id: int

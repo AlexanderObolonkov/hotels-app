@@ -33,6 +33,7 @@ types-redis = "^4.6.0.7"
 celery-types = "^0.20.0"
 types-pillow = "^10.1.0.0"
 pytest = "^7.4.3"
+pytest-asyncio = "^0.21.1"
 
 [build-system]
 requires = ["poetry-core"]
@@ -45,6 +46,17 @@ select = ["F", "E", "W", "C90",
 ignore = ["A003", "B008", "S105", "B904", "PTH123"]  # TODO: fix after experiments
 exclude = ["migrations"]
 
+[tool.ruff.per-file-ignores]
+"*_test.py" = [
+    "S101"
+]
+"*_tests.py" = [
+    "S101"
+]
+"test_*.py" = [
+    "S101"
+]
+
 [tool.mypy]
 explicit_package_bases = true
 plugins = ["pydantic.mypy", "sqlalchemy.ext.mypy.plugin"]
@@ -52,3 +64,4 @@ plugins = ["pydantic.mypy", "sqlalchemy.ext.mypy.plugin"]
 [tool.pytest.ini_options]
 pythonpath = ". app"
 asyncio_mode = "auto"
+python_files = ["*_test.py", "*_tests.py", "test_*.py"]
