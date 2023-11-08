@@ -1,9 +1,10 @@
 import asyncio
 import json
 from datetime import datetime
-from typing import Any, Generator
+from typing import Any, AsyncGenerator, Generator
 
 import pytest
+from httpx import AsyncClient
 from sqlalchemy import insert
 
 from app.bookings.models import Bookings
@@ -11,6 +12,7 @@ from app.config import settings
 from app.database import Base, async_session_maker, engine
 from app.hotels.models import Hotels
 from app.hotels.rooms.models import Rooms
+from app.main import app as fastapi_app
 from app.users.models import Users
 
 
@@ -54,3 +56,9 @@ def event_loop(request) -> Generator[asyncio.AbstractEventLoop, Any, None]:
     loop = asyncio.get_event_loop_policy().new_event_loop()
     yield loop
     loop.close()
+
+
+@pytest.fixture(scope="function")
+async def get_async_client() -> AsyncGenerator[AsyncClient, Any]:
+    async with AsyncClient(app=fastapi_app, base_url="http://test") as ac:
+        yield ac
