@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 
 
 class BookingException(HTTPException):
-    status_code = 404
+    status_code = status.HTTP_404_NOT_FOUND
     detail = ""
 
     def __init__(self):
