@@ -62,3 +62,16 @@ def event_loop(request) -> Generator[asyncio.AbstractEventLoop, Any, None]:
 async def get_async_client() -> AsyncGenerator[AsyncClient, Any]:
     async with AsyncClient(app=fastapi_app, base_url="http://test") as ac:
         yield ac
+
+
+@pytest.fixture(scope="session")
+async def get_authenticated_async_client():
+    async with AsyncClient(app=fastapi_app, base_url="http://test") as ac:
+        await ac.post(
+            "/auth/login",
+            json={
+                "email": "test@test.com",
+                "password": "test",
+            },
+        )
+        yield ac
