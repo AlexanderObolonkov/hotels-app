@@ -65,7 +65,7 @@ async def get_async_client() -> AsyncGenerator[AsyncClient, Any]:
 
 
 @pytest.fixture(scope="session")
-async def get_authenticated_async_client():
+async def get_authenticated_async_client() -> AsyncGenerator[AsyncClient, Any]:
     async with AsyncClient(app=fastapi_app, base_url="http://test") as ac:
         await ac.post(
             "/auth/login",
