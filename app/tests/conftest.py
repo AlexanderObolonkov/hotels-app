@@ -4,6 +4,7 @@ from datetime import datetime
 from typing import Any, AsyncGenerator, Generator
 
 import pytest
+from asgi_lifespan import LifespanManager
 from httpx import AsyncClient
 from sqlalchemy import insert
 
@@ -60,7 +61,9 @@ def event_loop(request) -> Generator[asyncio.AbstractEventLoop, Any, None]:
 
 @pytest.fixture(scope="function")
 async def get_async_client() -> AsyncGenerator[AsyncClient, Any]:
-    async with AsyncClient(app=fastapi_app, base_url="http://test") as ac:
+    async with AsyncClient(
+        app=fastapi_app, base_url="http://test"
+    ) as ac, LifespanManager(fastapi_app):
         yield ac
 
 
