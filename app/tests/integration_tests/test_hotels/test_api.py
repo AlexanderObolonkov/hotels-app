@@ -18,7 +18,6 @@ async def test_get_hotels_by_location_and_time(
     status_code: int,
     get_async_client: AsyncClient,
 ):
-    assert 123 == 123
     response = await get_async_client.get(
         f"/hotels/{location}",
         params={
