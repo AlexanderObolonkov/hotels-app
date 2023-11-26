@@ -11,11 +11,11 @@ from app.hotels.dao import HotelsDAO
         (7, False),
     ],
 )
-async def test_find_user_by_id(hotel_id, is_present):
+async def test_find_hotel_by_id(hotel_id: int, is_present: bool):
     hotel = await HotelsDAO.find_one_or_none(id=hotel_id)
 
     if is_present:
         assert hotel
-        assert hotel["id"] == hotel_id
+        assert hotel.id == hotel_id
     else:
         assert not hotel
