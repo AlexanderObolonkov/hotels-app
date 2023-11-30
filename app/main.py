@@ -20,14 +20,15 @@ from app.logger import logger
 from app.pages.router import router as router_pages
 from app.users.router import router as router_users
 
-app = FastAPI()
+app = FastAPI(
+    title="Бронирование Отелей",
+)
 
 if settings.MODE != "TEST":
     sentry_sdk.init(
         dsn=settings.SENTRY_DSN,
         traces_sample_rate=1.0,
     )
-
 
 app.mount("/static", StaticFiles(directory="app/static"), "static")
 
