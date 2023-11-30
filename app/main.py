@@ -1,5 +1,6 @@
 import time
 
+import sentry_sdk
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -20,6 +21,13 @@ from app.pages.router import router as router_pages
 from app.users.router import router as router_users
 
 app = FastAPI()
+
+if settings.MODE != "TEST":
+    sentry_sdk.init(
+        dsn=settings.SENTRY_DSN,
+        traces_sample_rate=1.0,
+    )
+
 
 app.mount("/static", StaticFiles(directory="app/static"), "static")
 

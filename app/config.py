@@ -13,6 +13,7 @@ class Settings(BaseSettings):
         "ERROR",
         "CRITICAL",
     ]
+    SENTRY_DSN: str
 
     DB_HOST: str
     DB_PORT: int
