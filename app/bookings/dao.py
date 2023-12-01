@@ -1,6 +1,6 @@
 from datetime import date
 
-from logger import logger  # type: ignore
+from app.logger import logger  # type: ignore
 from sqlalchemy import and_, func, insert, or_, select
 from sqlalchemy.exc import SQLAlchemyError
 
