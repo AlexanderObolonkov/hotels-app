@@ -1,6 +1,5 @@
 from datetime import date
 
-from app.logger import logger  # type: ignore
 from sqlalchemy import and_, func, insert, or_, select
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -8,6 +7,7 @@ from app.bookings.models import Bookings
 from app.dao.base import BaseDAO
 from app.database import async_session_maker
 from app.hotels.rooms.models import Rooms
+from app.logger import logger  # type: ignore
 
 
 class BookingDAO(BaseDAO):
