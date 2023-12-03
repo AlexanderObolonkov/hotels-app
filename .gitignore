@@ -8,4 +8,5 @@ venv/
 env/
 .mypy_cache/
 .env
+.env-non-dev
 .ruff_cache
