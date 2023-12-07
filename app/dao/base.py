@@ -1,8 +1,10 @@
 from typing import Optional
 
 from sqlalchemy import delete, insert, select
+from sqlalchemy.exc import SQLAlchemyError
 
 from app.database import Base, async_session_maker
+from app.logger import logger
 
 
 class BaseDAO:
@@ -35,3 +37,26 @@ class BaseDAO:
             query = delete(cls.model).filter_by(**filter_by)
             await session.execute(query)
             await session.commit()
+
+    @classmethod
+    async def add_bulk(cls, *data):
+        try:
+            query = (
+                insert(cls.model)
+                .values(*data)
+                .returning(cls.model.id if cls.model.id else "no id")
+            )
+            async with async_session_maker() as session:
+                result = await session.execute(query)
+                await session.commit()
+                return result.mappings().first()
+        except (SQLAlchemyError, Exception) as e:
+            msg = ""
+            if isinstance(e, SQLAlchemyError):
+                msg = "Database Exc"
+            elif isinstance(e, Exception):
+                msg = "Unknown Exc"
+            msg += ": Cannot bulk insert data into table"
+
+            logger.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
+            return None
