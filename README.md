@@ -34,6 +34,7 @@ cp .env.example .env.  # env-non-dev
 
 ```bash
 poetry install
+poetry shell
 alembic upgrade head
 uvicorn app.main:app
 celery -A app.tasks.celery:celery worker --loglevel=INFO
